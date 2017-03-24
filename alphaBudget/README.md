@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+## To run
+ruby bin\rails server
+Currently at section 5.4 Creating the Article model
