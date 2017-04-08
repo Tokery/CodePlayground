@@ -1,0 +1,12 @@
+extends index
+
+// register form
+block income
+    form(method="POST" action="/")
+      div.form-group 
+          label.control-label(for="name") Name:
+          input#name.form-control(type='text', placeholder='Enter transaction name' name='name')
+      div.form-group
+          label.control-label(for="amount") Amount:
+          input#amount.form-control(type='text', placeholder='Dollar amount' name='amount')
+      button.btn.btn-primary(type='submit') Add transaction

@@ -6,16 +6,23 @@ var api = require('../controllers/transaction');
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', income: ['One', 'Two'] });
+// Get all sources of income
+router.get('/income', function(req, res, next) {
+  res.render('income');
 });
 
-router.post('/', function(req, res, next){
+
+// Add a source of income
+router.post('/income', function(req, res, next){
   console.log(req.body);
   res.json(req.body);
   api.new(req,res);
   //res.sendStatus(200);
+});
+
+// Add an expense
+router.post('/expense', function(req,res,next){
+  console.log(req.body)
 })
 
 module.exports = router;

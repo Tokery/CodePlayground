@@ -1,11 +1,24 @@
 extends layout
 
 block content
+  - var values = ['One', 'Two']; // Get this info from an ajax call
   h1= title
   p Welcome to #{title}
   div.col-md-4
-    // register form
+    h2 My Income
     form(method="POST" action="/")
+      div.form-group 
+          label.control-label(for="name") Name:
+          input#name.form-control(type='text', placeholder='Enter transaction name' name='name')
+      div.form-group
+          label.control-label(for="amount") Amount:
+          input#amount.form-control(type='text', placeholder='Dollar amount' name='amount')
+      button.btn.btn-primary(type='submit') Add transaction
+    h2 Current Income
+    each val in values
+       p=val
+    h2 My expenses
+    form(method="POST" action="/expenses")
       div.form-group 
           label.control-label(for="name") Name:
           input#name.form-control(type='text', placeholder='Enter transaction name' name='name')

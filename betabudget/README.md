@@ -1,4 +1,5 @@
 ### Start express
+Make sure MongoDB is running before starting the app!
 npm start
 
 
