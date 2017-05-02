@@ -5,12 +5,13 @@ exports.newIncome = function (req, res) {
     var testTransaction = new Transaction ({ name: req.body.name, amount: req.body.amount, type: 'income' });
     testTransaction.save(function (err, testTransaction) {
         if (err) { return console.error(err); }
-        testTransaction.getName();
+        console.log('successfully saved');
+        //testTransaction.getName();
     })
 }
 
 exports.all = function (req, res, next) {
     Transaction.find(function(err, threads){
-        next(threads);
+        res.send(threads);
     })
 }

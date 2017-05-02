@@ -8,7 +8,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', income: ['One', 'Two'] });
+  res.render('index', { title: 'Express' }); //
 });
 
 router.post('/', function(req, res, next){
