@@ -6,6 +6,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Tasks } from '../api/tasks.js';
  
 import Task from './Task.jsx';
+import Transactions from './Transactions.jsx';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
  
 // App component - represents the whole app
@@ -18,77 +19,23 @@ class App extends Component {
       hideCompleted: false,
     };
   }
-
- handleSubmit(event) {
-    event.preventDefault();
- 
-    // Find the text field via the React ref
-    const value = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
- 
-    Meteor.call('tasks.insert', value);
- 
-    // Clear form
-    ReactDOM.findDOMNode(this.refs.textInput).value = '';
-  }
-
-  toggleHideCompleted() {
-    this.setState({
-      hideCompleted: !this.state.hideCompleted,
-    });
-  }
-
-  renderTasks() {
-    let filteredTasks = this.props.tasks;
-    if (this.state.hideCompleted) {
-      filteredTasks = filteredTasks.filter(task => !task.checked);
-    }
-    return filteredTasks.map((task) => {
-      const currentUserId = this.props.currentUser && this.props.currentUser._id;
-      const showPrivateButton = task.owner === currentUserId;
- 
-      return (
-        <Task
-          key={task._id}
-          task={task}
-          showPrivateButton={showPrivateButton}
-        />
-      );
-    });
-  }
  
   render() {
     return (
       <div className="container">
-        <header>
-          <h1>Expenses ({this.props.incompleteCount})</h1>
-
-          <label className="hide-completed">
-            <input
-              type="checkbox"
-              readOnly
-              checked={this.state.hideCompleted}
-              onClick={this.toggleHideCompleted.bind(this)}
-            />
-            Hide Completed Tasks
-          </label>
-
-          <AccountsUIWrapper />
-          
-          { this.props.currentUser ? 
-            <form className="new-expense" onSubmit={this.handleSubmit.bind(this)} >
-              <input
-                type="text"
-                ref="textInput"
-                placeholder="Type to add a new expense"
-              />
-            </form> : '' 
-          }
-        </header>
- 
-        <ul>
-          {this.renderTasks()}
-        </ul>
+        <Transactions 
+        tasks={this.props.tasks} 
+        incompleteCount={this.props.incompleteCount}
+        currentUser={this.props.currentUser}
+        type="Expenses"/>
+        
+        <Transactions 
+        tasks={this.props.tasks} 
+        incompleteCount={this.props.incompleteCount}
+        currentUser={this.props.currentUser}
+        type="Income"/>
       </div>
+      
     );
   }
 }

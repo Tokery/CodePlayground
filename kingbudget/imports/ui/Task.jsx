@@ -19,6 +19,12 @@ export default class Task extends Component {
     Meteor.call('tasks.setPrivate', this.props.task._id, ! this.props.task.private);
   }
 
+  formatDate(date) {
+    var newDate = new Date(date)
+    // Could use moment js
+    return newDate.toDateString();
+  }
+
   render() {
     // Give tasks a different className when they are checked off,
     // so that we can style them nicely in CSS
@@ -47,8 +53,12 @@ export default class Task extends Component {
         ) : ''}
 
         <span className="text">
-          <strong>{this.props.task.username}</strong>: {this.props.task.value}
+          <strong>{this.props.task.username}</strong>: {this.props.task.value} 
         </span>
+        <span className="date">
+          {this.formatDate(this.props.task.createdAt)}
+        </span>
+        
       </li>
     );
   }

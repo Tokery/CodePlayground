@@ -18,7 +18,7 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  'tasks.insert'(value) {
+  'tasks.insert'(value, type) {
     check(value, String);
  
     // Make sure the user is logged in before inserting a task
@@ -30,6 +30,7 @@ Meteor.methods({
       value,
       createdAt: new Date(),
       owner: Meteor.userId(),
+      type,
       username: Meteor.user().username,
     });
   },

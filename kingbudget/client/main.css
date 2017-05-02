@@ -24,7 +24,7 @@ body {
   background: white;
 }
  
-header {
+.header {
   background: #d2edf4;
   background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
   padding: 20px 15px 15px 15px;
@@ -102,7 +102,7 @@ li.private {
   border-color: #ddd;
 }
  
-header .hide-completed {
+.header .hide-completed {
   float: right;
 }
  
@@ -123,4 +123,8 @@ header .hide-completed {
   .new-expense input {
     padding-bottom: 5px;
   }
+}
+
+.date {
+  float: right;
 }
