@@ -1,0 +1,6 @@
+env: flex
+runtime: custom
+env_variables:
+  ROOT_URL: https://kingbudget-166804.appspot-preview.com
+  MONGO_URL: mongodb://admin:kevin@ds127101.mlab.com:27101/devdb
+  DISABLE_WEBSOCKETS: "1"
