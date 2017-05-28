@@ -17,14 +17,20 @@
 
   <body>
 
-    <h1>Expense Tracker</h1>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4 offset-md-4" style="text-align:center; margin-top: 10em">
+      <h1 style="text-align: center">Expense Tracker</h1>
 
-    <% if (req.session.me) { %>
-    <a href="/logout">Logout</a>
-    <div id="root"></div>
-    <% } else { %>
-    <a href="/login">Login</a> | <a href="/signup">Signup</a>
-    <% } %>
+      <div id="main-app">
+      <% if (req.session.me) { %>
+      <a href="/logout">Logout</a>
+      <div id="root"></div>
+      <% } else { %>
+      <a href="/login">Login</a> | <a href="/signup">Signup</a>
+      <% } %>
+      </div>
+    </div>
 
 
     <!--SCRIPTS-->
