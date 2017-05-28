@@ -18,6 +18,7 @@
  * For more information on configuration, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.connections.html
  */
+var productionENV = require('./env/production.js')
 
 module.exports.connections = {
 
@@ -60,9 +61,12 @@ module.exports.connections = {
     adapter: 'sails-mongo',
     host: 'localhost',
     port: 27017,
-    database: 'sails'
-    // user: 'username', //optional
-    // password: 'password', //optional
+    database: 'devdb'
+    // host: 'ds127101.mlab.com',
+    // port: 27101,
+    // database: 'devdb',
+    // user: productionENV.mongoSettings.user, //optional
+    // password: productionENV.mongoSettings.password, //optional
     // database: 'your_mongo_db_name_here' //optional
   },
 

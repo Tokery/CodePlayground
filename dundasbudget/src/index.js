@@ -2,7 +2,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import App from './App.jsx';
+
+var tempTasks = [
+  {
+    _id: 1,
+    username: 'Kevin',
+    value: 100,
+    createdAt: 0,
+    private: true
+  }
+];
+var count = 2;
+
 ReactDOM.render(
-  <h1>Hello, world!</h1>,
+  <App
+    tasks={tempTasks}
+    incompleteCount={count}
+  />,
   document.getElementById('root')
 );
