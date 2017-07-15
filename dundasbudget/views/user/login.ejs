@@ -1,13 +1,26 @@
-<h1>Login</h1>
-<form action="/login" method="post">
+<body>
 
-  <label for="email">Your email address?</label>
-  <input name="email" type="text"/>
-  <br/>
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4 offset-md-4" style="text-align:center; margin-top: 10em">
+    <h1 style="text-align: center">Expense Tracker</h1>
 
-  <label for="password">Your safe word?</label>
-  <input name="password" type="password"/>
-  <br/>
+    <div id="signup">
+      <h2 style="text-align: left">Login</h2>
+      <form action="/login" method="post">
 
-  <input type="submit"/>
-</form>
+        <label for="email">Email</label>
+        <br/>
+        <input name="email" type="text" />
+        <br/>
+
+        <label for="password">Enter your Password</label>
+        <br/>
+        <input name="password" type="password" />
+        <br/>
+
+        <input type="submit" />
+      </form>
+    </div>
+  </div>
+</body>

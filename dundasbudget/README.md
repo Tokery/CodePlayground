@@ -9,3 +9,7 @@ gcloud app deploy
 
 # Compile front-end
 Use npm run dev to start webpack
+Use npm run prod to create the production build of the front-end
+
+# Run the project locally
+sails lift

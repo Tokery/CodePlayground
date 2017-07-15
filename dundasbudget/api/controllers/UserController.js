@@ -13,12 +13,16 @@ module.exports = {
    * `UserController.login()`
    */
   login: function (req, res) {
-    return res.json({
+
+    User.attemptLogin({
       email: req.param('email'),
-      password: req.param('password'),
-      successRedirect: '/',
-      invalidRedirect: '/login'
-    });
+      password: req.param('password');
+    }, function(err, user){
+      if (err) return res.negotiate(err);
+
+      req.session.me = user.id;
+    })
+    return res.redirect('/');
   },
 
 

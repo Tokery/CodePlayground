@@ -59,14 +59,14 @@ module.exports.connections = {
   ***************************************************************************/
   transactionMongodbServer: {
     adapter: 'sails-mongo',
-    host: 'localhost',
-    port: 27017,
-    database: 'devdb'
-    // host: 'ds127101.mlab.com',
-    // port: 27101,
-    // database: 'devdb',
-    // user: productionENV.mongoSettings.user, //optional
-    // password: productionENV.mongoSettings.password, //optional
+    // host: 'localhost',
+    // port: 27017,
+    // database: 'devdb'
+    host: 'ds127101.mlab.com',
+    port: 27101,
+    database: 'devdb',
+    user: productionENV.mongoSettings.user, //optional
+    password: productionENV.mongoSettings.password, //optional
     // database: 'your_mongo_db_name_here' //optional
   },
 
