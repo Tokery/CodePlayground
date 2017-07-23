@@ -16,7 +16,7 @@ module.exports = {
 
     User.attemptLogin({
       email: req.param('email'),
-      password: req.param('password');
+      password: req.param('password')
     }, function(err, user){
       if (err) return res.negotiate(err);
 
