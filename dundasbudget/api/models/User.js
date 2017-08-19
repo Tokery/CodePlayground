@@ -24,6 +24,9 @@ module.exports = {
 
   signup: function(inputs, cb) {
     // Create a user
+    User.findOne({
+      email: inputs.email
+    })
     User.create({
       name: inputs.name,
       email: inputs.email,

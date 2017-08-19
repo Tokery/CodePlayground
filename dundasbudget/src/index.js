@@ -11,9 +11,17 @@ var tempTasks = [
     value: 100,
     createdAt: 0,
     private: true
+  },
+  {
+    _id: 2,
+    username: 'Kevin',
+    value: 23,
+    createdAt: 0,
+    private: true,
+    checked: true
   }
 ];
-var count = 2;
+var count = 1;
 
 ReactDOM.render(
   <App

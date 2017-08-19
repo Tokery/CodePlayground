@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 
 import Task from './Task.jsx';
@@ -8,10 +9,25 @@ import Task from './Task.jsx';
 export default class Transactions extends Component {
   constructor(props) {
     super(props);
- 
+
     this.state = {
       hideCompleted: false,
+      tasks: []
     };
+  }
+
+  componentDidMount() {
+    var that = this;
+    axios.get('/transaction')
+      .then(function(response) {
+        that.setState({
+          tasks: response.data
+        })
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    
   }
 
   handleSubmit(event) {
@@ -19,11 +35,21 @@ export default class Transactions extends Component {
 
     // Find the text field via the React ref
     const value = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+    var newItem = {
+      text: 'Text',
+      amount: value,
+      createdAt: Date.now()
+    }
+    axios.post('/transaction', newItem);
 
+    // Will require post then get
     //Meteor.call('tasks.insert', value, this.props.type);
 
     // Clear form
     ReactDOM.findDOMNode(this.refs.textInput).value = '';
+    this.setState((prevState) => ({
+      tasks: prevState.tasks.concat(newItem)
+    }));
   }
 
   toggleHideCompleted() {
@@ -33,7 +59,7 @@ export default class Transactions extends Component {
   }
 
   renderTasks() {
-    let filteredTasks = this.props.tasks;
+    let filteredTasks = this.state.tasks;
     if (this.state.hideCompleted) {
       filteredTasks = filteredTasks.filter(task => !task.checked);
     }
@@ -74,7 +100,7 @@ export default class Transactions extends Component {
               <input
                 type="text"
                 ref="textInput"
-                placeholder="Type to add a new expense"
+                placeholder="Type to add a new item"
               />
             </form> : ''
           }
@@ -89,7 +115,7 @@ export default class Transactions extends Component {
 }
 
 Transactions.propTypes = {
-  tasks: PropTypes.array.isRequired,
+  //tasks: PropTypes.array.isRequired,
   incompleteCount: PropTypes.number.isRequired,
   //currentUser: PropTypes.object,
   type: PropTypes.string.isRequired

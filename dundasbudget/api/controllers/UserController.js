@@ -19,10 +19,10 @@ module.exports = {
       password: req.param('password')
     }, function(err, user){
       if (err) return res.negotiate(err);
-
       req.session.me = user.id;
-    })
-    return res.redirect('/');
+      return res.redirect('/');
+    });
+    
   },
 
 

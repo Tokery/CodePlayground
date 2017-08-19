@@ -14,6 +14,7 @@ export default class App extends Component {
  
     this.state = {
       hideCompleted: false,
+      currentUser: 'Kevin'
     };
   }
  
@@ -23,12 +24,14 @@ export default class App extends Component {
         <Transactions 
         tasks={this.props.tasks} 
         incompleteCount={this.props.incompleteCount}
-        type="Expenses"/>
+        type="Expenses"
+        currentUser= {this.state.currentUser}/>
         
         <Transactions 
         tasks={this.props.tasks} 
         incompleteCount={this.props.incompleteCount}
-        type="Income"/>
+        type="Income"
+        currentUser= {this.state.currentUser}/>
       </div>
       
     );
