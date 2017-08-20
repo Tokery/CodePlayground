@@ -54,7 +54,13 @@ module.exports = {
       email: req.param('email'),
       password: req.param('password')
     }, function(err, user) {
-      // res.negotiate will determine if this is a validation error or some kine of
+      
+      if (err = "Duplicate") {
+        req.flash('error', 'Email address taken');
+        return res.redirect('/signup');
+      }
+      
+      // res.negotiate will determine if this is a validation error or some kind of
       // unexpected server error and then call res.badRequest or res.serverError
       if (err) return res.negotiate(err);
 

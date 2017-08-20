@@ -9,6 +9,11 @@ module.exports = {
 
   attributes: {
 
+    name: {
+      type: 'string',
+      required: true
+    },
+
     email : { 
       type: 'email',
       required: true,
@@ -26,14 +31,22 @@ module.exports = {
     // Create a user
     User.findOne({
       email: inputs.email
-    })
-    User.create({
-      name: inputs.name,
-      email: inputs.email,
-      // TODO: encrypt the password
-      password: inputs.password
-    })
-    .exec(cb);
+    }).exec(function (err, user) {
+      
+      if (!user) {
+        User.create({
+          name: inputs.name,
+          email: inputs.email,
+          // TODO: encrypt the password
+          password: inputs.password
+        })
+        .exec(cb);
+      }
+      else {
+        cb("Duplicate");
+      }
+    });
+    
   },
 
   attemptLogin: function(inputs, cb) {
