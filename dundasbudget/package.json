@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "description": "a Sails application",
   "keywords": [],
+  "engines": {
+    "node": "4.4.7"
+  },
   "dependencies": {
     "axios": "^0.16.2",
     "classnames": "^2.2.5",
@@ -30,7 +33,7 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js",
+    "start": "sails lift",
     "dev": "webpack -wd",
     "prod": "webpack -p"
   },
