@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './App.jsx';
+import App from './components/App.jsx';
 
 var tempTasks = [
   {
@@ -28,5 +28,5 @@ ReactDOM.render(
     tasks={tempTasks}
     incompleteCount={count}
   />,
-  document.getElementById('root')
+  document.getElementById('app')
 );

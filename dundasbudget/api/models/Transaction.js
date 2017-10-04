@@ -15,7 +15,7 @@ module.exports = {
 
     datecreated : { type: 'datetime' },
 
-    createdby : { type: 'string' }
+    createdBy : { type: 'string' }
   }
 };
 

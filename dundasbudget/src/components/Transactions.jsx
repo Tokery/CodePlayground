@@ -36,14 +36,11 @@ export default class Transactions extends Component {
     // Find the text field via the React ref
     const value = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
     var newItem = {
-      text: 'Text',
-      amount: value,
-      createdAt: Date.now()
+      text: value,
+      createdAt: Date.now(),
+      createdBy: 'Kevin'
     }
     axios.post('/transaction', newItem);
-
-    // Will require post then get
-    //Meteor.call('tasks.insert', value, this.props.type);
 
     // Clear form
     ReactDOM.findDOMNode(this.refs.textInput).value = '';
@@ -60,6 +57,8 @@ export default class Transactions extends Component {
 
   renderTasks() {
     let filteredTasks = this.state.tasks;
+    console.log('This state');
+    console.log(this.state);
     if (this.state.hideCompleted) {
       filteredTasks = filteredTasks.filter(task => !task.checked);
     }
@@ -81,19 +80,7 @@ export default class Transactions extends Component {
     return (
       <div>
         <div className="header">
-          <h1>{this.props.type} ({this.props.incompleteCount})</h1>
-
-          <label className="hide-completed">
-            <input
-              type="checkbox"
-              readOnly
-              checked={this.state.hideCompleted}
-              onClick={this.toggleHideCompleted.bind(this)}
-            />
-            Hide Completed Tasks
-          </label>
-
-          
+          <h1>{this.props.type} </h1>
 
           {this.props.currentUser ?
             <form className="new-expense" onSubmit={this.handleSubmit.bind(this)} >
@@ -115,8 +102,6 @@ export default class Transactions extends Component {
 }
 
 Transactions.propTypes = {
-  //tasks: PropTypes.array.isRequired,
   incompleteCount: PropTypes.number.isRequired,
-  //currentUser: PropTypes.object,
   type: PropTypes.string.isRequired
 }
