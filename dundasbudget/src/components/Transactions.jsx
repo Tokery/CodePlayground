@@ -2,9 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-
 import Task from './Task.jsx';
-//import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
 export default class Transactions extends Component {
   constructor(props) {
@@ -12,22 +10,17 @@ export default class Transactions extends Component {
 
     this.state = {
       hideCompleted: false,
-      tasks: []
+      tasks: this.props.tasks
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    this.setState({ tasks: nextProps.tasks });
+  }
+
   componentDidMount() {
-    var that = this;
-    axios.get('/transaction')
-      .then(function(response) {
-        that.setState({
-          tasks: response.data
-        })
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-    
+    console.log('Transactions mounted');
   }
 
   handleSubmit(event) {
@@ -65,6 +58,7 @@ export default class Transactions extends Component {
     return filteredTasks.map((task) => {
       //const currentUserId = this.props.currentUser && this.props.currentUser._id;
       const showPrivateButton = true;
+      console.log('Creating task');
 
       return (
         <Task
@@ -103,5 +97,6 @@ export default class Transactions extends Component {
 
 Transactions.propTypes = {
   incompleteCount: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  tasks: PropTypes.array.isRequired
 }

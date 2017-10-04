@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
  
  
 import Task from './Task.jsx';
@@ -15,8 +16,29 @@ export default class App extends Component {
     this.state = {
       hideCompleted: false,
       currentUser: 'Kevin',
-      loggedIn: true
+      loggedIn: true,
+      tasks: []
     };
+  }
+
+  componentWillMount() {
+    console.log('App mounting');
+    var that = this;
+    axios.get('/transaction')
+      .then(function(response) {
+        console.log('Kevin');
+        console.log(response);
+        that.setState({
+          tasks: response.data
+        })
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+  componentDidMount() {
+    
   }
  
   render() {
@@ -41,7 +63,7 @@ export default class App extends Component {
         </div>
         <div className="container">
           <Transactions 
-          tasks={this.props.tasks} 
+          tasks={this.state.tasks} 
           incompleteCount={this.props.incompleteCount}
           type="Expenses"
           currentUser= {this.state.currentUser}/>        
@@ -54,7 +76,6 @@ export default class App extends Component {
 }
 
 App.propTypes = {
-  tasks: PropTypes.array.isRequired,
   incompleteCount: PropTypes.number.isRequired,
   session: PropTypes.object
 };
