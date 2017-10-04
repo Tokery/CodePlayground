@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 
+var tempMinify = false;
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -22,12 +24,12 @@ module.exports = {
       }
     ]
   },
-  plugins: [
+  plugins: tempMinify ? [
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }
     }),
     new webpack.optimize.UglifyJsPlugin()
-  ]
+  ] : []
 };

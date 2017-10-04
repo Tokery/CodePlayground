@@ -24,12 +24,11 @@ module.exports = {
    */
   create: function (req, res) {
     var params = req.params.all();
-    var amount = Number(params.amount)
+    var date = new Date(params.createdAt)
     Transaction.create({
       text: params.text,
-      amount: amount,
-      datecreated: new Date(Date.now()),
-      createdby: 'Kevin'
+      dateCreated: date,
+      createdBy: params.createdBy
     }).exec(function cb(err, created) {
       if (err) {
         return res.serverError(err); 
