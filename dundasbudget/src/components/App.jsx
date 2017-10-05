@@ -1,14 +1,16 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import firebase from 'firebase';
+import firebaseui from 'firebaseui';
  
- 
+
 import Task from './Task.jsx';
 import Transactions from './Transactions.jsx';
-//import AccountsUIWrapper from './AccountsUIWrapper.jsx';
+import AuthComponent from './AuthComponent.jsx';
  
 // App component - represents the whole app
-// Should probably split this into sub components for income and expenses
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -40,6 +42,14 @@ export default class App extends Component {
   componentDidMount() {
     
   }
+
+  handleLogin() {
+
+  }
+
+  handleLogout() {
+
+  }
  
   render() {
     return (
@@ -50,27 +60,17 @@ export default class App extends Component {
           <h1 style={{textAlign: 'center'}}>Expense Tracker</h1>
 
           <div id="main-app">
-          { this.loggedIn ? 
-          <div>
-            <a href="/logout">Logout</a> 
-            <div id="root"></div>
-          </div> : 
-          <div> 
-            <a href="/login">Login</a> | <a href="/signup">Signup</a>
+            <AuthComponent/>
           </div>
-          }
+          <div className="container">
+            <Transactions 
+            tasks={this.state.tasks} 
+            incompleteCount={this.props.incompleteCount}
+            type="Expenses"
+            currentUser= {this.state.currentUser}/>        
           </div>
-        </div>
-        <div className="container">
-          <Transactions 
-          tasks={this.state.tasks} 
-          incompleteCount={this.props.incompleteCount}
-          type="Expenses"
-          currentUser= {this.state.currentUser}/>        
         </div>
       </div>
-      
-      
     );
   }
 }
