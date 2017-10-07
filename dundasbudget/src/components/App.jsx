@@ -9,6 +9,16 @@ import firebaseui from 'firebaseui';
 import Task from './Task.jsx';
 import Transactions from './Transactions.jsx';
 import AuthComponent from './AuthComponent.jsx';
+
+var config = {
+  apiKey: "AIzaSyCaOybCA27gy2sI-skFpgw7Awq4GOLHeIE",
+  authDomain: "dundasbudget.firebaseapp.com",
+  databaseURL: "https://dundasbudget.firebaseio.com",
+  projectId: "dundasbudget",
+  storageBucket: "",
+  messagingSenderId: "547835951770"
+};
+firebase.initializeApp(config);
  
 // App component - represents the whole app
 export default class App extends Component {
@@ -28,8 +38,6 @@ export default class App extends Component {
     var that = this;
     axios.get('/transaction')
       .then(function(response) {
-        console.log('Kevin');
-        console.log(response);
         that.setState({
           tasks: response.data
         })
