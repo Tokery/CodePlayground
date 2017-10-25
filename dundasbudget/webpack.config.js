@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 
-var tempMinify = false;
+var production = process.env.NODE_ENV === "production" ? true : false;
 
 module.exports = {
   entry: './src/index.js',
@@ -26,7 +26,7 @@ module.exports = {
       }
     ]
   },
-  plugins: tempMinify ? [
+  plugins: production ? [
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')

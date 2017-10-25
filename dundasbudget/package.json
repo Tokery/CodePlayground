@@ -5,12 +5,13 @@
   "description": "a Sails application",
   "keywords": [],
   "engines": {
-    "node": "4.4.7"
+    "node": "6.11.4"
   },
   "dependencies": {
     "axios": "^0.16.2",
     "classnames": "^2.2.5",
     "ejs": "2.3.4",
+    "firebase-admin": "^5.4.3",
     "firebaseui": "^2.3.0",
     "grunt": "1.0.1",
     "grunt-contrib-clean": "1.0.0",

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import firebase from 'firebase';
 import firebaseui from 'firebaseui';
- 
+
 
 import Task from './Task.jsx';
 import Transactions from './Transactions.jsx';
@@ -18,13 +18,12 @@ var config = {
   storageBucket: "",
   messagingSenderId: "547835951770"
 };
-firebase.initializeApp(config);
- 
+
 // App component - represents the whole app
 export default class App extends Component {
   constructor(props) {
     super(props);
- 
+
     this.state = {
       hideCompleted: false,
       currentUser: null,
@@ -33,17 +32,29 @@ export default class App extends Component {
     };
   }
 
-  componentWillMount() {
+  populateTransactions() {
     var that = this;
-    axios.get('/transaction')
-      .then(function(response) {
-        that.setState({
-          tasks: response.data
+    firebase.auth().currentUser.getIdToken(true).then((idToken) => {
+      axios.get('/transaction', {
+        headers: {'X-Token': idToken}
+      }).then(function (response) {
+          console.log('Recieved from backend');
+          console.log(response);
+          that.setState({
+            tasks: response.data
+          })
         })
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+        .catch(function (error) {
+          console.log(error);
+        });
+    }).catch((error) => {
+      console.error("App.jsx: ");
+      console.error(error);
+    })
+  }
+
+  componentWillMount() {
+    firebase.initializeApp(config);
   }
 
   componentDidMount() {
@@ -61,7 +72,8 @@ export default class App extends Component {
         this.setState({
           loggedOut: false,
           currentUser: displayName
-        })
+        });
+        this.populateTransactions();
       }
       else {
         console.log('Not logged in');
@@ -80,24 +92,26 @@ export default class App extends Component {
   handleLogout() {
 
   }
- 
+
   render() {
     return (
       <div>
         <div className="col-md-4">
         </div>
-        <div className="col-md-4 offset-md-4" style={{textAlign:'center', marginTop: '10em'}}>
-          <h1 style={{textAlign: 'center'}}>Eiditic: Remember Everything</h1>
-          { this.state.loggedOut ? 
+        <div className="col-md-4 offset-md-4" style={{ textAlign: 'center', marginTop: '10em' }}>
+          <h1 style={{ textAlign: 'center' }}>Eidetic: Remember Everything</h1>
+          {this.state.loggedOut &&
             <div id="main-app">
-              <AuthComponent/>
-            </div> :
-            <div className="container">
-              <Transactions 
-              tasks={this.state.tasks} 
-              incompleteCount={this.props.incompleteCount}
-              type="Expenses"
-              currentUser= {this.state.currentUser}/>        
+              <AuthComponent />
+            </div>
+          }
+          {!this.state.loggedOut &&
+            <div>
+              <Transactions
+                tasks={this.state.tasks}
+                incompleteCount={this.props.incompleteCount}
+                type="Expenses"
+                currentUser={this.state.currentUser} />
             </div>
           }
         </div>

@@ -13,9 +13,18 @@ module.exports = {
    * `TransactionController.index()`
    */
   index: function (req, res) {
-    Transaction.find({}).exec(function cb(err, records){
-      return res.json(records);
-    })    
+    sails.log.debug('Token: ' + req.get('X-Token'));
+    TransactionService.checkAuth(req.get('X-Token'), (error) => {
+      if (error) {
+        return res.forbidden("Auth Token Failed");
+      }
+      else {
+        Transaction.find({}).exec(function cb(err, records){
+          return res.json(records);
+        });
+      }
+    })
+        
   },
 
 

@@ -50,7 +50,8 @@ export default class Transactions extends Component {
   }
 
   renderTasks() {
-    let filteredTasks = this.state.tasks;
+    //let filteredTasks = this.state.tasks;
+    let filteredTasks = [];
     console.log('This state');
     console.log(this.state);
     if (this.state.hideCompleted) {

@@ -50,6 +50,6 @@ export default class Task extends Component {
  
 Task.propTypes = {
   task: PropTypes.object.isRequired,
-  showPrivateButton: React.PropTypes.bool.isRequired,
-  key: React.PropTypes.string
+  showPrivateButton: PropTypes.bool.isRequired,
+  key: PropTypes.string
 };
